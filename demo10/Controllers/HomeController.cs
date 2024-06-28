@@ -15,7 +15,20 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        Console.WriteLine("Hi!");
         return View();
+    }
+
+
+    [HttpPost]
+    public IActionResult Index(Price price)
+    {
+
+        var priceAmount = price.PriceAmount;
+
+        Console.WriteLine($"Received price amount: {priceAmount}");
+
+        return RedirectToAction("Privacy");
     }
 
     public IActionResult Privacy()

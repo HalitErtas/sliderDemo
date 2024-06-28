@@ -1,4 +1,5 @@
-﻿@{
+﻿@model demo10.Models.Price;
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -17,40 +18,21 @@
     
 
     <!--begin::Slider-->
-    <div class="d-flex flex-column text-center">
-        <div class="d-flex align-items-start justify-content-center mb-7">
-            <span class="fw-bold fs-4 mt-1 me-2">$</span>
-            <span class="fw-bold fs-3x" id="kt_modal_create_campaign_budget_label"></span>
-            <div class="fw-bold fs-3x" id="kt_docs_forms_advanced_interactive_slider_label">0</div>
-            <span class="fw-bold fs-3x">.00</span>
-        </div>
-        <div id="slider" class="noUi-sm"></div>
-    </div>
+    <form method="post" asp-controller="Home" asp-action="Index">
+      <div class="d-flex flex-column text-center">
+          <div class="d-flex align-items-start justify-content-center mb-3">
+              <span class="fw-bold fs-1 me-1">$</span>
+              <div class="fw-bold fs-1" id="sliderLabel">
+                  <label asp-for="PriceAmount"></label>
+                  <input type="number" asp-for="PriceAmount">
+              </div>
+              <span class="fw-bold fs-1">.00</span>
+          </div>
+          <div id="slider" class="noUi-sm"></div>
+      </div>
+      <button class="button-6 mt-4" role="button" type="submit">submit</button>
+
+  </form>
     <!--end::Slider-->
     
 </div>
-
-@section Scripts {
-    <script type="text/javascript">
-var budgetSlider = document.querySelector("#slider");
-var budgetValue = document.querySelector("#kt_docs_forms_advanced_interactive_slider_label");
-
-noUiSlider.create(budgetSlider, {
-    start: [5],
-    connect: true,
-    range: {
-        "min": 1,
-        "max": 500
-    }
-});
-
-budgetSlider.noUiSlider.on("update", function (values, handle) {
-    budgetValue.innerHTML = Math.round(values[handle]);
-    if (handle) {
-        budgetValue.innerHTML = Math.round(values[handle]);
-    }
-});
-    </script>
-    
-
-}
